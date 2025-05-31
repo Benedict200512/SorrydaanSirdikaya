@@ -9,11 +9,11 @@ class Coach extends Model
 {
     use HasFactory;
 
-    protected $table = 'coach';
+    protected $table = 'coaches';
 
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
         'email',
         'phonenumber',
         'specialization',

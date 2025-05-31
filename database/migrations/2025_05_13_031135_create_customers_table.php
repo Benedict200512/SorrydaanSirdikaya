@@ -13,20 +13,18 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->enum('gender', ['male', 'female', 'other']); 
 
             $table->unsignedBigInteger('membership_id');
-            $table->unsignedBigInteger('coach_id');
-            $table->unsignedBigInteger('workout_id');
+            $table->unsignedBigInteger('coach_id')->nullable(); // nullable required for onDelete('set null')
+            $table->unsignedBigInteger('workout_id')->nullable(); // nullable required for onDelete('set null')
 
             $table->timestamps();
-        });
 
-        
-        Schema::table('customers', function (Blueprint $table) {
+            // Foreign key constraints
             $table->foreign('membership_id')->references('id')->on('memberships')->onDelete('cascade');
             $table->foreign('coach_id')->references('id')->on('coaches')->onDelete('set null');
             $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('set null');

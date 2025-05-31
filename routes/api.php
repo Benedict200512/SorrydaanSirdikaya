@@ -51,6 +51,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/add-membership', [MembershipController::class, 'create']);
     Route::put('/edit-membership/{id}', [MembershipController::class, 'update']);
     Route::delete('/delete-membership/{id}', [MembershipController::class, 'delete']);
+
+    Route::get('/get-roles', [RoleController::class, 'getRoles']);
+    Route::post('/add-roles', [RoleController::class, 'addRole']);
+    Route::put('/edit-roles/{id}', [RoleController::class, 'editRole']);
+    Route::delete('/delete-roles/{id}', [RoleController::class, 'deleteRole']);
     
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 });

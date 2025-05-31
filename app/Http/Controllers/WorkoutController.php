@@ -25,11 +25,9 @@ class WorkoutController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'coach_id' => 'required|exists:users,id',
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'name' => 'required|string|max:255',
             'duration' => 'required|integer|min:1',
-            'date' => 'required|date',
+            'intensity' => 'required|string|max:50',
         ]);
 
         $workout = Workout::create($request->all());
@@ -48,11 +46,9 @@ class WorkoutController extends Controller
         }
 
         $request->validate([
-            'coach_id' => 'required|exists:users,id',
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'name' => 'required|string|max:255',
             'duration' => 'required|integer|min:1',
-            'date' => 'required|date',
+            'intensity' => 'required|string|max:50',
         ]);
 
         $workout->update($request->all());

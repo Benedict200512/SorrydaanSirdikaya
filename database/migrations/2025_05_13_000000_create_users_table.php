@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->foreignId('user_status_id')->constrained('user_statuses')->onDelete('cascade');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('username')->unique(); 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -29,8 +29,8 @@ return new class extends Migration
 
         $users = [
             [
-                'firstname' => 'Benedict',
-                'lastname' => 'Alicante',
+                'first_name' => 'Benedict',
+                'last_name' => 'Alicante',
                 'username' => 'Benedok', 
                 'email' => 'benedok@gmail.com',
                 'password' => Hash::make('password'),

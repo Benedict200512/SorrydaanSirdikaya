@@ -16,16 +16,19 @@ class CoachController extends Controller
     public function addCoach(Request $request)
     {
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:coaches'],
+            'phonenumber' => ['nullable', 'string', 'max:20'],
             'specialization' => ['nullable', 'string', 'max:255'],
+            
         ]);
 
         $coach = Coach::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
+            'phonenumber' => $request->phonenumber,
             'specialization' => $request->specialization,
         ]);
 
@@ -35,9 +38,10 @@ class CoachController extends Controller
     public function editCoach(Request $request, $id)
     {
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:coaches,email,' . $id],
+            'phonenumber' => ['nullable', 'string', 'max:20'],
             'specialization' => ['nullable', 'string', 'max:255'],
         ]);
 
@@ -48,9 +52,10 @@ class CoachController extends Controller
         }
 
         $coach->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
+            'phonenumber' => $request->phonenumber,
             'specialization' => $request->specialization,
         ]);
 

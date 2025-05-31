@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     public function getCustomers()
     {
-        $customers = Customer::with('membership', 'coach', 'workout')->get();
+        $customers = Customer::with('memberships', 'coaches', 'workouts')->get();
 
         return response()->json(['customers' => $customers]);
     }
@@ -17,8 +17,8 @@ class CustomerController extends Controller
     public function addCustomer(Request $request)
     {
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:customers'],
             'gender' => ['required', 'in:male,female,other'],
             'membership_id' => ['required', 'exists:memberships,id'],
@@ -27,8 +27,8 @@ class CustomerController extends Controller
         ]);
 
         $customer = Customer::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'gender' => $request->gender,
             'membership_id' => $request->membership_id,
@@ -42,8 +42,8 @@ class CustomerController extends Controller
     public function editCustomer(Request $request, $id)
     {
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:customers,email,' . $id],
             'gender' => ['required', 'in:male,female,other'],
             'membership_id' => ['required', 'exists:memberships,id'],
@@ -58,8 +58,8 @@ class CustomerController extends Controller
         }
 
         $customer->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'gender' => $request->gender,
             'membership_id' => $request->membership_id,

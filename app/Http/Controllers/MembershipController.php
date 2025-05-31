@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CustomerMembership;
+use App\Models\Membership;
 
 class MembershipController extends Controller
 {
     public function getAll()
     {
-        $memberships = CustomerMembership::all();
+        $memberships = Membership::all();
         return response()->json($memberships);
     }
 
     public function getById($id)
     {
-        $membership = CustomerMembership::find($id);
+        $membership = Membership::find($id);
         if (!$membership) {
             return response()->json(['message' => 'Membership not found'], 404);
         }
@@ -25,14 +25,13 @@ class MembershipController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'customer_id' => 'required|exists:users,id',
             'membership_status' => 'required|string|max:50',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'price' => 'required|numeric|min:0',
         ]);
 
-        $membership = CustomerMembership::create($request->all());
+        $membership = Membership::create($request->all());
 
         return response()->json([
             'message' => 'Membership created successfully',
@@ -42,13 +41,12 @@ class MembershipController extends Controller
 
     public function update(Request $request, $id)
     {
-        $membership = CustomerMembership::find($id);
+        $membership = Membership::find($id);
         if (!$membership) {
             return response()->json(['message' => 'Membership not found'], 404);
         }
 
         $request->validate([
-            'customer_id' => 'required|exists:users,id',
             'membership_status' => 'required|string|max:50',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
@@ -65,7 +63,7 @@ class MembershipController extends Controller
 
     public function delete($id)
     {
-        $membership = CustomerMembership::find($id);
+        $membership = Membership::find($id);
         if (!$membership) {
             return response()->json(['message' => 'Membership not found'], 404);
         }

@@ -10,7 +10,6 @@ class Membership extends Model
     use HasFactory;
 
     protected $fillable = [
-        'customer_id',
         'membership_status',
         'start_date',
         'end_date',
@@ -18,8 +17,5 @@ class Membership extends Model
     ];
 
    
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
+    
 }

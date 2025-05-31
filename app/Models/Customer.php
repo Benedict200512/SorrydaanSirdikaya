@@ -9,17 +9,20 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname','lastname', 'email', 'gender',  'membership_id', 'coach_id', 'workout_id'];
+    protected $fillable = ['first_name','last_name', 'email', 'gender',  'membership_id', 'coach_id', 'workout_id'];
 
-    public function membership(){
-        return $this->belongsTo(Membership::class);
-    }
+   public function coaches()
+{
+    return $this->belongsTo(Coach::class);
+}
 
-    public function coaches(){
-        return $this->belongsTo(Coach::class);
-    }
+public function workouts()
+{
+    return $this->belongsTo(Workout::class);
+}
 
-    public function workouts(){
-        return $this->belongsTo(Corkout::class);
-    }
+public function memberships()
+{
+    return $this->belongsTo(Membership::class); 
+}
 }
